@@ -29,6 +29,8 @@ class Instagram:
         self.csrftoken = csrftoken
         self.ds_user_id = ds_user_id
 
+
+
     def __make_request__(self, url: str, headers: dict) -> dict:
         """
         Makes an HTTP GET request to the specified URL with the given headers.
@@ -52,6 +54,8 @@ class Instagram:
             print(f"An error occurred: {e}")
             return None
 
+
+
     def getUserProfileInfo(self) -> dict:
         """
         Retrieves the profile information for the specified Instagram username.
@@ -68,6 +72,8 @@ class Instagram:
         }
         # Make the API request and return the response.
         return self.__make_request__(url, headers)
+
+
 
     def getUserFollowers(self, id: str) -> list:
         """
@@ -108,6 +114,8 @@ class Instagram:
         
         # Return the full list of followers.
         return all_followers
+
+
 
     def getUserFollowing(self, id: str) -> list:
         """
