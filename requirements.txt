@@ -1,2 +1,4 @@
 requests==2.32.3
+selenium==4.7.2
 setuptools==72.2.0
+undetected-chromedriver==2.1.1
