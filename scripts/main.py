@@ -3,8 +3,7 @@ from components.following import getUserFollowing
 from components.profile import getUserProfileInfo
 
 # Define paths for source and logs
-PATH_SRC = "../src"
-PATH_LOG = "../logs"
+PATH_SRC, PATH_LOG = "../src", "../logs"
 
 # Read CSRF token from file to authenticate Instagram requests
 with open(f"{PATH_SRC}/instagram_cookies", "r") as f:
