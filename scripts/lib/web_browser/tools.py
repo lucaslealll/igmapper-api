@@ -13,7 +13,7 @@ warnings.filterwarnings("ignore")
 
 def start_browser(
     url: str = "https://google.com.br",
-    chromedriver_path: str = "",
+    chromedriver: str = "",
     headless: bool = False,
     soundless: bool = True,
 ) -> webdriver.Chrome:
@@ -62,7 +62,7 @@ def start_browser(
     if system_type == "Windows" or system_type == "Darwin":
         browser = webdriver.Chrome(options=OPTS)
     elif system_type == "Linux":
-        browser = webdriver.Chrome(options=OPTS, executable_path=chromedriver_path)
+        browser = webdriver.Chrome(options=OPTS, executable_path=chromedriver)
     else:
         raise OSError("Sistema operacional não identificado")
 

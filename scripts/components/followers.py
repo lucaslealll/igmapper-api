@@ -1,46 +1,56 @@
 from components.instagram import BASE_URL_FRIENDSHIPS, XIGAPPID, instagram_request
 
+from components.utils import bold
 
-def getUserFollowers(id: str, csrftoken) -> list:
-    """
-    Retrieves a list of followers for the specified Instagram user ID.
 
-    Args:
-        id (str): The Instagram user ID to retrieve followers for.
+# Função para obter seguidores
+def getUserFollowers(user_id: str, csrftoken: str) -> list:
 
-    Returns:
-        list: A list of dictionaries containing follower information.
-    """
-    # Construct the URL for fetching user followers.
-    url = BASE_URL_FRIENDSHIPS + id + f"/followers/?count=25"
-    # Set the necessary headers, including the csrf token and user ID.
-    headers = {
-        "cookie": f"csrftoken={csrftoken}; ds_user_id={id}; sessionid={id}%3A8o8K5zLqGYCyet%3A1%3AAYdPySdgKgpc33bh1Xn3Q5oatRSyiKl131JhQuPZLw;",
-        "x-ig-app-id": XIGAPPID,
-    }
-    all_followers = []
-    while url:
-        # Make the API request to fetch followers.
-        data = instagram_request(url, headers)
-        if data is None:
-            # Return the followers list if there's an error.
-            return all_followers
+    try:
+        # Construir URL para buscar seguidores
+        url = BASE_URL_FRIENDSHIPS + user_id + "/followers/?count=25"
 
-        # Extract the list of followers from the response.
-        users = data.get("users", [])
-        all_followers.extend(users)
+        # Cabeçalhos para requisição
+        headers = {
+            "cookie": f"csrftoken={csrftoken}; ds_user_id={user_id}; sessionid={csrftoken}%3A8o8K5zLqGYCyet%3A1%3AAYdPySdgKgpc33bh1Xn3Q5oatRSyiKl131JhQuPZLw;",
+            "x-ig-app-id": XIGAPPID,
+        }
 
-        # Get the next page ID for pagination.
-        next_max_id = data.get("next_max_id")
-        # Update the URL for the next page of followers.
-        url = (
-            BASE_URL_FRIENDSHIPS + id + f"/followers/?count=25&max_id={next_max_id}"
-            if next_max_id
-            else None
-        )
+        all_followers = []
 
-        # Print progress to the console.
-        print(f"Loading...{len(all_followers)}", end="\r", flush=True)
+        while url:
+            # Fazer requisição à API
+            data = instagram_request(url, headers)
+            if "error" in data:
+                # Retornar seguidores acumulados se houver erro
+                print(data["details"])  # Log de erro
+                return all_followers
 
-    # Return the full list of followers.
-    return all_followers
+            # Extrair lista de seguidores da resposta
+            users = data.get("users", [])
+            all_followers.extend(users)
+
+            # Pegar o ID da próxima página para paginação
+            next_max_id = data.get("next_max_id")
+            url = (
+                BASE_URL_FRIENDSHIPS
+                + user_id
+                + f"/followers/?count=25&max_id={next_max_id}"
+                if next_max_id
+                else None
+            )
+
+            # Mostrar progresso
+            print(
+                f"Loading... {len(all_followers)} followers loaded.",
+                end="\r",
+                flush=True,
+            )
+
+        # Retornar lista completa de seguidores
+        return all_followers
+
+    except Exception as e:
+        # Lançar exceção com log detalhado
+        print(f"{bold("E:")} Fetching Followers: {str(e)}")
+        raise
