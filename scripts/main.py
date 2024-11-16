@@ -1,28 +1,32 @@
 from datetime import datetime
 
-from components.followers import getUserFollowers
-
-# from components.following import getUserFollowing
-from components.profile import getUserProfileInfo
-
-from components.utils import *
+from components import bold, getUserFollowers, getUserProfileInfo, italic
+from lib import start_browser
 
 # Define paths for source and logs
 PATH_SRC, PATH_LOG = "../src", "../logs"
 
+output = f"""{"="*43}
+{"="*2}   {bold("Instagram Followers & Unfollowers")}   {"="*2}
+{"="*43}"""
+print(output)
+
+usr = input(bold("Enter the Instagram username (without '@'): "))
+usr = "bellatormma"
+if not usr:
+    print("No username provided. Exiting.")
+    exit(1)
+
+print(f"{bold("Login • Instagram")}\n{italic("You nedd to login to continue")}")
+exit()
+
+
+
+
+
 # Read CSRF token from file to authenticate Instagram requests
 csrftoken = eval(open(f"{PATH_SRC}/instagram_cookies", "r").read()).get("csrftoken")
 
-# usr = input("Enter the Instagram username (without '@'):\n⤷ ").strip()
-usr = "bellatormma"
-# if not usr:
-#     print("No username provided. Exiting.")
-#     exit(1)
-
-output = f"""{"="*43}
-{"="*2}   Instagram Followers & Unfollowers   {"="*2}
-{"="*43}"""
-print(output)
 
 # Retrieve user account information
 print("Retrieving user account ID...")
@@ -39,7 +43,8 @@ else:
     # Extract user ID from the fetched account data
     user = acc["data"]["user"]
     user_id = user["id"]
-    print(f"User profile ID fetched successfully!")
+    print(italic(user_id))
+    # print(f"User profile ID fetched successfully!")
 
 
 bio = user["biography"]
@@ -65,16 +70,16 @@ print(output)
 
 
 # Retrieve the user's followers and following lists using the user ID
-# print("Fetching followers and following lists...")
-# try:
-#     acc_followers = getUserFollowers(user_id, csrftoken)
-#     print("⤷ Followers data retrieved successfully!")
-#     # acc_following = getUserFollowing(user_id, csrftoken)
-#     # print("⤷ Following data retrieved successfully!")
-# except Exception as e:
-#     exit()
+print("Fetching followers and following lists...")
+try:
+    acc_followers = getUserFollowers(user_id, csrftoken)
+    print("⤷ Followers data retrieved successfully!")
+    # acc_following = getUserFollowing(user_id, csrftoken)
+    # print("⤷ Following data retrieved successfully!")
+except Exception as e:
+    exit()
 
-# # Create dictionaries to store 'following' and 'followers' details
+# Create dictionaries to store 'following' and 'followers' details
 # following_dict, followers_dict = {}, {}
 
 # # Populate the 'following' dictionary with usernames and full names
