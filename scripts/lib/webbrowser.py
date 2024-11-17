@@ -74,6 +74,12 @@ def start_browser(
         browser.quit()
 
 
+def extract_cookies(driver, directory) -> None:
+    "save cookie as `cookie.pkl`"
+    with open(f"{directory}/cookies.pkl", "wb") as file:
+        pickle.dump(driver.get_cookies(), file)
+
+
 def import_cookies(file_path, file_name, webdriver_browser):
     """Import cookies to browser.
 

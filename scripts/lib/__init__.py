@@ -1,3 +1,3 @@
-from lib.webbrowser import start_browser
+from lib.webbrowser import *
 
-__all__ = ["start_browser"]
+__all__ = ["start_browser", "extract_cookie"]
