@@ -1,5 +1,4 @@
 import requests
-from requests.exceptions import HTTPError, RequestException
 from components.utils import bold
 
 # Application ID for Instagram API requests.
@@ -24,5 +23,5 @@ def instagram_request(url: str, headers: dict = None) -> dict:
         response.raise_for_status()  # Raise an exception for HTTP errors
         return response.json()  # Parse and return the JSON response
     except Exception as e:
-        print(f"{bold("E:")}", str(e))
+        print(f"{bold('E:')}", str(e))
         raise
