@@ -6,6 +6,7 @@
 tmp/*
 src/*
 logs/*
+.vscode/
 
 # Compiled files and bytecode
 *$py.class
