@@ -1,32 +1,58 @@
-from datetime import datetime
+# %%
+import os
+import pickle
+from time import sleep
 
-from components import bold, getUserFollowers, getUserProfileInfo, italic
-from lib import start_browser
+from components import (
+    bold,
+    getUserFollowers,
+    getUserFollowing,
+    getUserProfileInfo,
+    italic,
+)
+from lib import start_browser, extract_cookies
 
 # Define paths for source and logs
-PATH_SRC, PATH_LOG = "../src", "../logs"
+CWD = os.getcwd()  # current working directory
+SRC, LOG = f"{CWD}/src", f"{CWD}/logs"
+PKL = f"{SRC}/cookies.pkl"
 
+CHROMEDRIVER = f"{CWD}/scripts/chromedriver"
+URL = "https://instagram.com/"
+XPATH_CONTAINER_FEED = "//*[contains(@class, 'xw7yly9')]"
+
+# %%
 output = f"""{"="*43}
-{"="*2}   {bold("Instagram Followers & Unfollowers")}   {"="*2}
+{"="*2}   {bold('Instagram Followers & Unfollowers')}   {"="*2}
 {"="*43}"""
 print(output)
 
 usr = input(bold("Enter the Instagram username (without '@'): "))
-usr = "bellatormma"
 if not usr:
     print("No username provided. Exiting.")
     exit(1)
 
-print(f"{bold("Login • Instagram")}\n{italic("You nedd to login to continue")}")
-exit()
+# %%
+try:
+    cookie = pickle.load(open(PKL, "rb"))
+    print("Cookie file founded...")
+except:
+    print(f"{bold('Login • Instagram')}\n{italic('You nedd to login to continue')}")
 
+    driver = start_browser(
+        url=URL, chromedriver=CHROMEDRIVER, headless=False, soundless=True
+    )
 
+    sleep(60)
 
+    extract_cookies(driver, SRC)
 
-
-# Read CSRF token from file to authenticate Instagram requests
-csrftoken = eval(open(f"{PATH_SRC}/instagram_cookies", "r").read()).get("csrftoken")
-
+cookie = pickle.load(open(PKL, "rb"))
+for i in cookie:
+    if "csrftoken" in i["name"]:
+        csrftoken = i["value"]
+    if "sessionid" in i["name"]:
+        sessionid = i["value"]
 
 # Retrieve user account information
 print("Retrieving user account ID...")
@@ -38,12 +64,11 @@ if not acc:
     exit(1)
 else:
     # Save account profile information to a JSON log file
-    open(f"{PATH_LOG}/{usr}-profile_info.json", "w").write(str(acc))
+    open(f"{LOG}/{usr}-profile_info.json", "w").write(str(acc))
 
     # Extract user ID from the fetched account data
     user = acc["data"]["user"]
     user_id = user["id"]
-    print(italic(user_id))
     # print(f"User profile ID fetched successfully!")
 
 
@@ -58,124 +83,65 @@ is_verified = user["is_verified"]
 posts_count = user["edge_owner_to_timeline_media"]["count"]
 
 output = f"""
-{italic(f"https://www.instagram.com/{usr}")}
-{bold(usr)} {"🟓" if is_verified else ""}
-{bold(posts_count)} posts     {bold(followed)} followers     {bold(follow)} following
-{bold(full_name) if full_name else "No name"}
-{italic(category_name) if category_name else "No category"}
-{bio if bio else "No bio"}
-{bold(f"🔗 {[i["url"] for i in bio_links]}") if bio_links else "No links"}
-{bold("🔒 This account is private") if is_private else ""}"""
+{bold('Investigated profile:')}
+    {italic(f'https://www.instagram.com/{usr}')}
+    {bold(usr)} {"🟓" if is_verified else ""}
+    {bold(posts_count)} posts     {bold(followed)} followers     {bold(follow)} following
+    {bold(full_name) if full_name else "No name"}
+    {italic(category_name) if category_name else "No category"}
+    '{bio if bio else "No bio"}'
+    {bold(f'🔗 {[i["url"] for i in bio_links]}') if bio_links else "No links"}
+    {bold('🔒 This account is private') if is_private else ""}
+"""
 print(output)
 
 
 # Retrieve the user's followers and following lists using the user ID
-print("Fetching followers and following lists...")
 try:
-    acc_followers = getUserFollowers(user_id, csrftoken)
-    print("⤷ Followers data retrieved successfully!")
-    # acc_following = getUserFollowing(user_id, csrftoken)
-    # print("⤷ Following data retrieved successfully!")
+    print("Get followers...")
+    acc_followers = getUserFollowers(user_id, csrftoken, sessionid)
+    print("Get following...")
+    acc_following = getUserFollowing(user_id, csrftoken, sessionid)
 except Exception as e:
     exit()
 
 # Create dictionaries to store 'following' and 'followers' details
-# following_dict, followers_dict = {}, {}
+following_dict, followers_dict = {}, {}
 
-# # Populate the 'following' dictionary with usernames and full names
-# print("Building following dictionary...")
-# for i in acc_following:
-#     usr = i.get("username")
-#     following_dict[usr] = i.get("full_name")
+# Populate the 'following' dictionary with usernames and full names
+print("Building following dictionary...")
+for i in acc_following:
+    usr = i.get("username")
+    following_dict[usr] = i.get("full_name")
 
-# # Populate the 'followers' dictionary with usernames and full names
-# print("Building followers dictionary...")
-# for i in acc_followers:
-#     usr = i.get("username")
-#     followers_dict[usr] = i.get("full_name")
+# Populate the 'followers' dictionary with usernames and full names
+print("Building followers dictionary...")
+for i in acc_followers:
+    usr = i.get("username")
+    followers_dict[usr] = i.get("full_name")
 
-# # Find users that are in 'following' but not in 'followers' (people who don't follow back)
-# non_followers = [
-#     username for username in following_dict if username not in followers_dict
-# ]
+# Find users that are in 'following' but not in 'followers' (people who don't follow back)
+print("Get non followers...")
+non_followers = [i for i in following_dict if i not in followers_dict]
 
-# # Print usernames that the user follows but who don't follow back
-# print("\nList of users you follow but who don't follow you back:")
-# if non_followers:
-#     for i, usr in enumerate(sorted(non_followers), 1):
-#         _full_name = following_dict[usr]
-#         print(f"#{i}: {_full_name} (@{usr})")
-# else:
-#     print("None - Everyone you follow also follows you back!")
+# Print usernames that the user follows but who don't follow back
+print(bold("Don't follow back:"))
+if non_followers:
+    for i, usr in enumerate(sorted(non_followers), 1):
+        fullname = following_dict[usr]
+        print(f"  {i}) {fullname:<30} {usr:<30} {URL+usr}")
+else:
+    print("None - Everyone you follow also follows you back!")
 
-# # Print the full list of 'following'
-# print("\nFull list of users you're following:")
-# for i, usr in enumerate(acc_following, 1):
-#     _username = usr.get("username")
-#     _full_name = usr.get("full_name")
-#     print(f"#{i}: {_full_name} (@{_username})")
+# Print the full list of 'following'
+_ = input(bold("Do you want to show the following list? [Y/n]: ")).strip().lower()
+if _ == "" or _ == "y":
+    for i, usr in enumerate(acc_following, 1):
+        username, fullname = usr["username"], usr["full_name"]
+        print(f"  {i}) {fullname:<30} {username:<30} {URL+username}")
 
-# # Print the full list of 'followers'
-# print("\nFull list of your followers:")
-# for i, usr in enumerate(acc_followers, 1):
-#     _username = usr.get("username")
-#     _full_name = usr.get("full_name")
-#     print(f"#{i}: {_full_name} (@{_username})")
-
-
-# # Create dictionaries to store 'following' and 'followers' details
-# following_dict, followers_dict = {}, {}
-
-# # Populate the 'following' dictionary with usernames and full names
-# print("Building following dictionary...")
-# for i in acc_following:
-#     usr = i.get("username")
-#     following_dict[usr] = i.get("full_name")
-
-# # Populate the 'followers' dictionary with usernames and full names
-# print("Building followers dictionary...")
-# for i in acc_followers:
-#     usr = i.get("username")
-#     followers_dict[usr] = i.get("full_name")
-
-# # Find users that are in 'following' but not in 'followers' (people who don't follow back)
-# non_followers = [
-#     username for username in following_dict if username not in followers_dict
-# ]
-
-# # Print usernames that the user follows but who don't follow back
-# print("\nList of users you follow but who don't follow you back:")
-# if non_followers:
-#     for i, usr in enumerate(sorted(non_followers), 1):
-#         _full_name = following_dict[usr]
-#         print(f"#{i}: {_full_name} (@{usr})")
-# else:
-#     print("None - Everyone you follow also follows you back!")
-
-# # Print the full list of 'following'
-# print("\nFull list of users you're following:")
-# for i, usr in enumerate(acc_following, 1):
-#     _username = usr.get("username")
-#     _full_name = usr.get("full_name")
-#     print(f"#{i}: {_full_name} (@{_username})")
-
-# # Print the full list of 'followers'
-# print("\nFull list of your followers:")
-# for i, usr in enumerate(acc_followers, 1):
-#     _username = usr.get("username")
-#     _full_name = usr.get("full_name")
-#     print(f"#{i}: {_full_name} (@{_username})")
-
-
-# # Saída formatada
-# output = f"""
-# {bold(user_data['nome_usuario'])}
-# {bold(user_data['quantidade_posts'])} posts     {bold(followers)} followers     {bold(following)} following 
-# 🔗 {user_data['url_perfil']}
-
-# {dont_follow_back} Don't follow you back!
-
-# Don't followed back by: {', '.join(dfb_list) if dfb_list else 'Nenhum'}
-# Followers: {', '.join(user_data['seguidores'])}
-# Following: {', '.join(user_data['seguindo'])}
-# """
+_ = input(bold("Do you want to show the followers list? [Y/n]: ")).strip().lower()
+if _ == "" or _ == "y":
+    for i, usr in enumerate(acc_followers, 1):
+        username, fullname = usr["username"], usr["full_name"]
+        print(f"  {i}) {fullname:<30} {username:<30} {URL+username}")
