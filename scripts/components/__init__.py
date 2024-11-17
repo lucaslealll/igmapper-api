@@ -5,18 +5,18 @@ from components.profile import *
 from components.utils import *
 
 __all__ = [
+    "BASE_URL_FRIENDSHIPS",
+    "BASE_URL_USERS",
+    "XIGAPPID",
+    "b_txt,",
     "getUserFollowers",
     "getUserFollowing",
-    "instagram_request",
     "getUserProfileInfo",
-    "XIGAPPID",
-    "BASE_URL_USERS",
-    "BASE_URL_FRIENDSHIPS",
-    "bold,",
-    "italic,",
-    "underline,",
-    "strikethrough",
-    "reset_color",
     "green",
+    "i_txt,",
+    "instagram_request",
     "red",
+    "reset_color",
+    "strikethrough",
+    "underline,",
 ]
