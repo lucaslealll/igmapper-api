@@ -1,7 +1,7 @@
 from components.instagram import BASE_URL_FRIENDSHIPS, XIGAPPID, instagram_request
 
 
-def getUserFollowing(id: str, csrftoken) -> list:
+def getUserFollowing(id: str, csrftoken: str, sessionid: str) -> list:
     """
     Retrieves a list of users that the specified Instagram user ID is following.
 
@@ -15,7 +15,7 @@ def getUserFollowing(id: str, csrftoken) -> list:
     url = BASE_URL_FRIENDSHIPS + id + f"/following/?count=25"
     # Set the necessary headers, including the csrf token and user ID.
     headers = {
-        "cookie": f"csrftoken={csrftoken}; ds_user_id={id}; sessionid={id}%3A8o8K5zLqGYCyet%3A1%3AAYdPySdgKgpc33bh1Xn3Q5oatRSyiKl131JhQuPZLw;",
+        "cookie": f"csrftoken={csrftoken}; ds_user_id={id}; sessionid={sessionid}",
         "x-ig-app-id": XIGAPPID,
     }
 
@@ -39,9 +39,6 @@ def getUserFollowing(id: str, csrftoken) -> list:
             if next_max_id
             else None
         )
-
-        # Print progress to the console.
-        print(f"Loading...{len(all_following)}", end="\r", flush=True)
 
     # Return the full list of following users.
     return all_following

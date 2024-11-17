@@ -1,10 +1,9 @@
 from components.instagram import BASE_URL_FRIENDSHIPS, XIGAPPID, instagram_request
-
 from components.utils import bold
 
 
 # Função para obter seguidores
-def getUserFollowers(user_id: str, csrftoken: str) -> list:
+def getUserFollowers(user_id: str, csrftoken: str, sessionid: str) -> list:
 
     try:
         # Construir URL para buscar seguidores
@@ -12,7 +11,7 @@ def getUserFollowers(user_id: str, csrftoken: str) -> list:
 
         # Cabeçalhos para requisição
         headers = {
-            "cookie": f"csrftoken={csrftoken}; ds_user_id={user_id}; sessionid={csrftoken}%3A8o8K5zLqGYCyet%3A1%3AAYdPySdgKgpc33bh1Xn3Q5oatRSyiKl131JhQuPZLw;",
+            "cookie": f"csrftoken={csrftoken}; ds_user_id={user_id}; sessionid={sessionid}",
             "x-ig-app-id": XIGAPPID,
         }
 
@@ -40,17 +39,10 @@ def getUserFollowers(user_id: str, csrftoken: str) -> list:
                 else None
             )
 
-            # Mostrar progresso
-            print(
-                f"Loading... {len(all_followers)} followers loaded.",
-                end="\r",
-                flush=True,
-            )
-
         # Retornar lista completa de seguidores
         return all_followers
 
     except Exception as e:
         # Lançar exceção com log detalhado
-        print(f"{bold("E:")} Fetching Followers: {str(e)}")
+        print(f"{bold('E:')} Fetching Followers: {str(e)}")
         raise
