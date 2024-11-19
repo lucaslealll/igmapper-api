@@ -40,5 +40,7 @@ def getUserFollowing(id: str, csrftoken: str, sessionid: str) -> list:
             else None
         )
 
+        print(f"\rFollowing count ≈ {len(all_following)}", end="", flush=True)
+
     # Return the full list of following users.
     return all_following

@@ -39,6 +39,8 @@ def getUserFollowers(user_id: str, csrftoken: str, sessionid: str) -> list:
                 else None
             )
 
+            print(f"\rFollowers count ≈ {len(all_followers)}", end="", flush=True)
+
         # Retornar lista completa de seguidores
         return all_followers
 
