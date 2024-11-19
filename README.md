@@ -13,12 +13,14 @@
 <h1><strong>Instagram Followers & Unfollowers</strong></h1>
 </div>
 
-## This code aims to:
-- List all followers who do not follow the account back;
-- List all followers of an *Instagram* account;
-- List all followers of an *Instagram* account.
+### This code aims to:
+- list all followers who do not follow the account back;
+- list all followers of an *Instagram* account;
+- list all followers of an *Instagram* account.
 
-## Install
+---
+
+### Install
 > [!IMPORTANT]
 > It's essential to **upgrade pip** to the latest version to ensure compatibility with the library.
 > ```sh
@@ -30,13 +32,16 @@
 > pip install -r requirements.txt
 > ```
 
-## Run
+---
 
+### Run
 To run the application, on the terminal run:
 ```sh
 cd <path_to>/instagram-followers
 python scripts/main.py
 ```
+
+---
 
 ### Output
 <pre>
