@@ -22,7 +22,7 @@ URL = "https://instagram.com/"
 XPATH_CONTAINER_FEED = "//*[contains(@class, 'xw7yly9')]"
 
 # %%
-print(f"{bold('Instagram Followers & Unfollowers')}")
+print(f"{bold('Instagram Followers & Unfollowers')}\n")
 
 usr = input(bold("Enter the Instagram username (without '@'): "))
 if not usr:
@@ -79,17 +79,15 @@ is_private = user["is_private"]
 is_verified = user["is_verified"]
 posts_count = user["edge_owner_to_timeline_media"]["count"]
 
-output = f"""
-{bold('Investigated profile:')}
-    {italic(f'https://www.instagram.com/{usr}')}
-    {bold(usr)} {"🟓" if is_verified else ""}
-    {bold(posts_count)} posts     {bold(followed)} followers     {bold(follow)} following
-    {bold(full_name) if full_name else "No name"}
-    {italic(category_name) if category_name else "No category"}
-    '{bio if bio else "No bio"}'
-    {bold(f'🔗 {[i["url"] for i in bio_links]}') if bio_links else "No links"}
-    {bold('🔒 This account is private') if is_private else ""}
-"""
+# {italic(f'https://www.instagram.com/{usr}')}
+output = f"""{bold('Investigated profile:')}
+－ {usr} {"🟓" if is_verified else ""}
+－ {bold(posts_count)} posts     {bold(followed)} followers     {bold(follow)} following
+－ {full_name if full_name else "No name"}
+－ {italic(category_name) if category_name else "No category"}
+－ "{bio if bio else "No bio"}"
+－ {f'{[i["url"] for i in bio_links]}' if bio_links else "No links"}
+－ {bold('This account is private') if is_private else "Public account"}"""
 print(output)
 
 
@@ -122,13 +120,19 @@ print("Get non followers...")
 non_followers = [i for i in following_dict if i not in followers_dict]
 
 # Print usernames that the user follows but who don't follow back
-print(bold("Don't follow back:"))
-if non_followers:
-    for i, usr in enumerate(sorted(non_followers), 1):
-        fullname = following_dict[usr]
-        print(f"  {i}) {fullname:<30} {usr:<30} {URL+usr}")
-else:
-    print("None - Everyone you follow also follows you back!")
+_ = (
+    input(bold("Do you want to show the don't follow back list? [Y/n]: "))
+    .strip()
+    .lower()
+)
+if _ == "" or _ == "y":
+    print(bold("Don't follow back:"))
+    if non_followers:
+        for i, usr in enumerate(sorted(non_followers), 1):
+            fullname = following_dict[usr]
+            print(f"  {i}) {fullname:<30} {usr:<30} {URL+usr}")
+    else:
+        print("None - Everyone you follow also follows you back!")
 
 # Print the full list of 'following'
 _ = input(bold("Do you want to show the following list? [Y/n]: ")).strip().lower()
