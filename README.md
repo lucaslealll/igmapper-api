@@ -51,12 +51,13 @@ Retrieving user account ID...
     <b>athena.mentorship</b> 🟓
     <b>0</b> posts     <b>9</b> followers     <b>3</b> following
     <b>Athena Mentorship</b>
-    No category
+    Education
     'Esclareça sua dúvida em um click!
     🧠 Para conectar mentes
     📚 Monitoria certificada online
     👇  Acompanhe nosso desenvolvimento'
     🔗 <b>['https://github.com/athena-mentorship']</b>
+
 Get followers...
 Get following...
 Building following dictionary...
