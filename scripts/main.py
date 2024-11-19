@@ -22,10 +22,7 @@ URL = "https://instagram.com/"
 XPATH_CONTAINER_FEED = "//*[contains(@class, 'xw7yly9')]"
 
 # %%
-output = f"""{"="*43}
-{"="*2}   {bold('Instagram Followers & Unfollowers')}   {"="*2}
-{"="*43}"""
-print(output)
+print(f"{bold('Instagram Followers & Unfollowers')}")
 
 usr = input(bold("Enter the Instagram username (without '@'): "))
 if not usr:
@@ -37,7 +34,7 @@ try:
     cookie = pickle.load(open(PKL, "rb"))
     print("Cookie file founded...")
 except:
-    print(f"{bold('Login • Instagram')}\n{italic('You nedd to login to continue')}")
+    print(f"{bold('Login • Instagram')}\n{italic('You need to login to continue')}")
 
     driver = start_browser(
         url=URL, chromedriver=CHROMEDRIVER, headless=False, soundless=True
