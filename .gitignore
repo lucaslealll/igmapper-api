@@ -139,4 +139,4 @@ dmypy.json
 # =============
 !**/.gitkeep
 !**/assets/*
-!**/scripts/lib
+!**/igmapper/lib

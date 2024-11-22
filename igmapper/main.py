@@ -17,7 +17,7 @@ CWD = os.getcwd()  # current working directory
 SRC, LOG = f"{CWD}/src", f"{CWD}/logs"
 PKL = f"{SRC}/cookies.pkl"
 
-CHROMEDRIVER = f"{CWD}/scripts/chromedriver"
+CHROMEDRIVER = f"{CWD}/igmapper/chromedriver"
 URL = "https://instagram.com/"
 XPATH_CONTAINER_FEED = "//*[contains(@class, 'xw7yly9')]"
 
