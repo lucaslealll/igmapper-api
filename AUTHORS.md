@@ -1,7 +1,14 @@
-# Author
+# Authors
 
-Instagram Followers and Unfollowers was written by:
+#### *IG Mapper API* was written by:
 
-- Lucas Leal ([@lucasoal](https://github.com/lucasoal)) 
+- Lucas Leal - [lucaslealll](https://github.com/lucaslealll)
 
-*See other project [contributors](https://github.com/lucasoal/InstagramFollowersAndUnfollowers/graphs/contributors)*
+<!-- #### Contributors
+
+<a href="https://github.com/lucaslealll/igmapper-api/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=lucaslealll/igmapper-api" />
+</a>
+
+*Made with [contrib.rocks](https://contrib.rocks).* -->
+
