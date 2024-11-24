@@ -3,7 +3,7 @@
 <br><br>
 
 ![](https://img.shields.io/badge/Python%20Version-3.10-111?&labelColor=2C6287)
-![](https://img.shields.io/badge/%20Version%20-1.0.0-111?&labelColor=2C6287)
+![](https://img.shields.io/badge/%20Version%20-1.0.1-111?&labelColor=2C6287)
 ![](https://img.shields.io/badge/Status-W.I.P-111?&labelColor=2C6287)
 [![](https://img.shields.io/badge/Code%20Style-Black-111?&labelColor=2C6287)](https://github.com/psf/black)
 
