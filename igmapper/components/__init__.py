@@ -1,8 +1,8 @@
-from components.followers import *
-from components.following import *
-from components.instagram import *
-from components.profile import *
-from components.utils import *
+from igmapper.components.followers import *
+from igmapper.components.following import *
+from igmapper.components.instagram import *
+from igmapper.components.profile import *
+from igmapper.components.utils import *
 
 __all__ = [
     "BASE_URL_FRIENDSHIPS",

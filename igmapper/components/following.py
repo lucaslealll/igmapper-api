@@ -1,4 +1,8 @@
-from components.instagram import BASE_URL_FRIENDSHIPS, XIGAPPID, instagram_request
+from igmapper.components.instagram import (
+    BASE_URL_FRIENDSHIPS,
+    XIGAPPID,
+    instagram_request,
+)
 
 
 def getUserFollowing(id: str, csrftoken: str, sessionid: str) -> list:
@@ -40,7 +44,8 @@ def getUserFollowing(id: str, csrftoken: str, sessionid: str) -> list:
             else None
         )
 
-        print(f"\rFollowing count ≈ {len(all_following)}", end="", flush=True)
+        print(f"\rFetched following [{len(all_following)}]", end="", flush=True)
 
     # Return the full list of following users.
+    print(" Done")
     return all_following

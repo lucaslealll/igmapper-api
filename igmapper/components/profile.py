@@ -1,4 +1,4 @@
-from components.instagram import BASE_URL_USERS, XIGAPPID, instagram_request
+from igmapper.components.instagram import BASE_URL_USERS, XIGAPPID, instagram_request
 
 
 def getUserProfileInfo(username, csrftoken) -> dict:

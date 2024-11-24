@@ -1,5 +1,6 @@
 import requests
-from components.utils import bold
+
+from igmapper.components.utils import bold
 
 # Application ID for Instagram API requests.
 XIGAPPID = "936619743392459"

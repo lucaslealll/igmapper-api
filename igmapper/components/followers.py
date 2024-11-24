@@ -1,8 +1,12 @@
-from components.instagram import BASE_URL_FRIENDSHIPS, XIGAPPID, instagram_request
-from components.utils import bold
-
-
 # Função para obter seguidores
+from igmapper.components.instagram import (
+    BASE_URL_FRIENDSHIPS,
+    XIGAPPID,
+    instagram_request,
+)
+from igmapper.components.utils import bold
+
+
 def getUserFollowers(user_id: str, csrftoken: str, sessionid: str) -> list:
 
     try:
@@ -39,9 +43,10 @@ def getUserFollowers(user_id: str, csrftoken: str, sessionid: str) -> list:
                 else None
             )
 
-            print(f"\rFollowers count ≈ {len(all_followers)}", end="", flush=True)
+            print(f"\rFetched followers [{len(all_followers)}]", end="", flush=True)
 
         # Retornar lista completa de seguidores
+        print(" Done")
         return all_followers
 
     except Exception as e:
