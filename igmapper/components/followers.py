@@ -1,22 +1,24 @@
 # Função para obter seguidores
-from igmapper.components.instagram import (
-    BASE_URL_FRIENDSHIPS,
-    XIGAPPID,
+from igmapper import (
+    API_BASE_FRIENDSHIPS,
+    API_END_FOLLOWERS,
+    bold_str,
     instagram_request,
 )
-from igmapper.components.utils import bold
 
 
-def getUserFollowers(user_id: str, csrftoken: str, sessionid: str) -> list:
+def get_user_followers(
+    user_id: str, csrftoken: str, sessionid: str, xigappid="936619743392459"
+) -> list:
 
     try:
         # Construir URL para buscar seguidores
-        url = BASE_URL_FRIENDSHIPS + user_id + "/followers/?count=25"
+        url = API_BASE_FRIENDSHIPS + user_id + API_END_FOLLOWERS
 
         # Cabeçalhos para requisição
         headers = {
             "cookie": f"csrftoken={csrftoken}; ds_user_id={user_id}; sessionid={sessionid}",
-            "x-ig-app-id": XIGAPPID,
+            "x-ig-app-id": xigappid,
         }
 
         all_followers = []
@@ -36,7 +38,7 @@ def getUserFollowers(user_id: str, csrftoken: str, sessionid: str) -> list:
             # Pegar o ID da próxima página para paginação
             next_max_id = data.get("next_max_id")
             url = (
-                BASE_URL_FRIENDSHIPS
+                API_BASE_FRIENDSHIPS
                 + user_id
                 + f"/followers/?count=25&max_id={next_max_id}"
                 if next_max_id
@@ -51,5 +53,5 @@ def getUserFollowers(user_id: str, csrftoken: str, sessionid: str) -> list:
 
     except Exception as e:
         # Lançar exceção com log detalhado
-        print(f"{bold('E:')} Fetching Followers: {str(e)}")
+        print(f"{bold_str('E:')} Fetching Followers: {str(e)}")
         raise

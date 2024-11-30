@@ -1,11 +1,24 @@
 import requests
 
-from igmapper.components.utils import bold
+from igmapper import bold_str
 
 # Application ID for Instagram API requests.
-XIGAPPID = "936619743392459"
-BASE_URL_USERS = "https://www.instagram.com/api/v1/users/web_profile_info/"
-BASE_URL_FRIENDSHIPS = "https://www.instagram.com/api/v1/friendships/"
+API_BASE_USERS = "https://www.instagram.com/api/v1/users/web_profile_info/?username="
+
+API_BASE_FRIENDSHIPS, API_END_FOLLOWERS, API_END_FOLLOWING = (
+    "https://www.instagram.com/api/v1/friendships/",
+    "/followers/?count=25",
+    "/following/?count=25",
+)
+
+API_BASE_FEED, API_END_FEED = (
+    "https://www.instagram.com/api/v1/feed/user/",
+    "/username/?count=33&max_id=",
+)
+API_BASE_COMMENTS, API_END_COMMENTS = (
+    "https://www.instagram.com/api/v1/media/",
+    "/comments/",
+)
 
 
 def instagram_request(url: str, headers: dict = None) -> dict:
@@ -24,5 +37,5 @@ def instagram_request(url: str, headers: dict = None) -> dict:
         response.raise_for_status()  # Raise an exception for HTTP errors
         return response.json()  # Parse and return the JSON response
     except Exception as e:
-        print(f"{bold('E:')}", str(e))
+        print(f"{bold_str('E:')}", str(e))
         raise

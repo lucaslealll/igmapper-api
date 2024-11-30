@@ -1,11 +1,13 @@
 from igmapper.components.instagram import (
-    BASE_URL_FRIENDSHIPS,
-    XIGAPPID,
+    API_BASE_FRIENDSHIPS,
+    API_END_FOLLOWING,
     instagram_request,
 )
 
 
-def getUserFollowing(id: str, csrftoken: str, sessionid: str) -> list:
+def get_user_following(
+    user_id: str, csrftoken: str, sessionid: str, xigappid="936619743392459"
+) -> list:
     """
     Retrieves a list of users that the specified Instagram user ID is following.
 
@@ -16,11 +18,11 @@ def getUserFollowing(id: str, csrftoken: str, sessionid: str) -> list:
         list: A list of dictionaries containing following user information.
     """
     # Construct the URL for fetching users that the specified ID is following.
-    url = BASE_URL_FRIENDSHIPS + id + f"/following/?count=25"
+    url = API_BASE_FRIENDSHIPS + user_id + API_END_FOLLOWING
     # Set the necessary headers, including the csrf token and user ID.
     headers = {
-        "cookie": f"csrftoken={csrftoken}; ds_user_id={id}; sessionid={sessionid}",
-        "x-ig-app-id": XIGAPPID,
+        "cookie": f"csrftoken={csrftoken}; ds_user_id={user_id}; sessionid={sessionid}",
+        "x-ig-app-id": xigappid,
     }
 
     all_following = []
@@ -39,7 +41,9 @@ def getUserFollowing(id: str, csrftoken: str, sessionid: str) -> list:
         next_max_id = data.get("next_max_id")
         # Update the URL for the next page of following users.
         url = (
-            BASE_URL_FRIENDSHIPS + id + f"/following/?count=25&max_id={next_max_id}"
+            API_BASE_FRIENDSHIPS
+            + user_id
+            + f"/following/?count=25&max_id={next_max_id}"
             if next_max_id
             else None
         )
