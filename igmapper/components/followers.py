@@ -7,7 +7,7 @@ from igmapper import (
 )
 
 
-def get_user_followers(
+def friendships_followers(
     user_id: str, csrftoken: str, sessionid: str, xigappid="936619743392459"
 ) -> list:
 

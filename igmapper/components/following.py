@@ -5,7 +5,7 @@ from igmapper.components.instagram import (
 )
 
 
-def get_user_following(
+def friendships_following(
     user_id: str, csrftoken: str, sessionid: str, xigappid="936619743392459"
 ) -> list:
     """

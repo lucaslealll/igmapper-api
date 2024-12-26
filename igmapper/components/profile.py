@@ -1,7 +1,7 @@
 from igmapper import API_BASE_USERS, instagram_request
 
 
-def get_user_profile_info(username, csrftoken, xigappid="936619743392459") -> dict:
+def web_profile_info(username, csrftoken, xigappid="936619743392459") -> dict:
     """
     Retrieves the profile information for the specified Instagram username.
 

@@ -4,7 +4,7 @@ import urllib
 from igmapper import API_BASE_COMMENTS, API_END_COMMENTS, instagram_request
 
 
-def get_comments(
+def media_comments(
     media_id, cookie, next_min_id=None, xigappid="936619743392459"
 ) -> tuple:
     csrftoken = cookie["csrftoken"]
