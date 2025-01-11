@@ -13,7 +13,6 @@ class Instagram:
         self.username = username
 
     
-
     def getUserProfileInfo():
         acc = web_profile_info(usr, csrftoken)
         user = acc["data"]["user"]
