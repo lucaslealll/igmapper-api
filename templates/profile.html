@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IG Mapper API</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <a href="{{ url_for('index') }}">
+                <button type="button">Voltar</button>
+            </a>
+        </div>
+
+        <br>
+        <br>
+
+        <img src="{{ url_for('static', filename='images/profile.png') }}">
+
+        <h3>{{ user.username }}</h3>
+        <p>
+            <b>{{ user.edge_owner_to_timeline_media.count }}</b> posts ·
+            <b>{{ user.edge_followed_by.count }}</b> followers ·
+            <b>{{ user.edge_follow.count }}</b> following
+        </p>
+
+        <p><b>{{ user.full_name }}</b></p>
+        <p>{{ user.biography }}</p>
+        <p>
+            {% for i in user.bio_links %}
+            <a href="{{ i['url'] }}">{{ i["url"] }}</a><br>
+            {% endfor %}
+        </p>
+
+        <p class="highlight">
+            <i>
+                {{ "Private" if user.is_private else "Public" }},
+                {{ user.category_name if user.category_name else "No category" }},
+                {{ "🟓 Verified" if user.is_verified else "Not verified" }}
+            </i>
+        </p>
+
+        <hr>
+
+        {% if non_followers %}
+        <h3>Non Followers</h3>
+        <p>
+            <b class="highlight">{{ non_followers|length }}</b> accounts don't follow back
+        </p>
+
+        <ul>
+            {% for user in non_followers %}
+            <a href="https://instagram.com/{{ user }}" target="_blank">{{ user }}</a><br>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+    </div>
+</body>
+
+</html>

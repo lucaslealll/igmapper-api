@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IG Mapper API</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="text-align: center;">IG Mapper API</h1>
+
+        <form method="POST" action="/">
+            <label for="username"><b>Digite o '@' do perfil</b></label>
+            <br>
+            <input type="text" id="username" name="username" placeholder="therock" required>
+            <div style="display: flex; justify-items: center;">
+                <button type="submit">Buscar</button>
+            </div>
+
+            <br>
+
+            <!-- Checkbox para calcular non-followers -->
+            <label for="calculate_non_followers">
+                <input type="checkbox" id="calculate_non_followers" name="calculate_non_followers">
+                Calc Non-Followers
+            </label>
+
+            <br>
+
+            <label for="download_followers_list">
+                <input type="checkbox" id="download_followers_list" name="download_followers_list">
+                Download followers list <i>(in development)</i>
+            </label>
+
+            <br>
+
+            <label for="download_following_list">
+                <input type="checkbox" id="download_following_list" name="download_following_list">
+                Download following list <i>(in development)</i>
+            </label>
+        </form>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <ul class="flash-messages">
+            {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+    </div>
+</body>
+
+</html>
