@@ -52,9 +52,13 @@
             <b class="highlight">{{ non_followers|length }}</b> accounts don't follow back
         </p>
 
+        <button onclick="window.location.href='/profile'">Download</button>
+
         <ul>
             {% for user in non_followers %}
-            <a href="https://instagram.com/{{ user }}" target="_blank">{{ user }}</a><br>
+            <li>
+                <a href="https://instagram.com/{{ user }}" target="_blank">{{ user }}</a> <br>
+            </li>
             {% endfor %}
         </ul>
         {% endif %}

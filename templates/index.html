@@ -9,15 +9,18 @@
 </head>
 
 <body>
+    <h1 style="text-align: left;">IG Mapper API</h1>
+
     <div class="container">
-        <h1 style="text-align: center;">IG Mapper API</h1>
+
+        <h2>Easily export all public information from an Instagram profile.</h2>
 
         <form method="POST" action="/">
             <label for="username"><b>Digite o '@' do perfil</b></label>
             <br>
             <input type="text" id="username" name="username" placeholder="therock" required>
             <div style="display: flex; justify-items: center;">
-                <button type="submit">Buscar</button>
+                <button type="submit">Search</button>
             </div>
 
             <br>
@@ -31,14 +34,14 @@
             <br>
 
             <label for="download_followers_list">
-                <input type="checkbox" id="download_followers_list" name="download_followers_list">
+                <input disabled type="checkbox" id="download_followers_list" name="download_followers_list">
                 Download followers list <i>(in development)</i>
             </label>
 
             <br>
 
             <label for="download_following_list">
-                <input type="checkbox" id="download_following_list" name="download_following_list">
+                <input disabled type="checkbox" id="download_following_list" name="download_following_list">
                 Download following list <i>(in development)</i>
             </label>
         </form>

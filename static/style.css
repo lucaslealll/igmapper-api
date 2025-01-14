@@ -1,34 +1,36 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #0E0D11;
-    margin: 0;
-    padding: 0;
+    background: rgb(28, 0, 78);
+    background: linear-gradient(0deg, rgba(28, 0, 78, 1) 0%, rgba(53, 9, 121, 1) 35%, rgba(133, 0, 255, 1) 100%);
+    background-size: cover;
+    /* Faz o fundo cobrir a tela */
+    background-attachment: fixed;
+    /* Mantém o fundo fixo enquanto a página é rolada */
+    padding: 0 5%;
 }
 
-.container {
-    color: #B3AFC0;
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #1D1B22;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 25px;
+h1 {
+    color: white;
+    font-size: bold;
+    text-transform: uppercase;
 }
 
-h1,
 h2 {
     color: #7C7DF8;
+    font-size: bold;
 }
 
 h3 {
     color: white;
+    font-size: bold;
+    font-style: italic;
 }
 
 input[type="text"] {
     padding: 8px;
     width: 25%;
     margin: 10px 0;
-    border: 1px solid #ccc;
+    border: 1px solid #2a2833;
     border-radius: 6px;
     background-color: #0E0D11;
     color: #EDEC8D;
@@ -47,6 +49,31 @@ button:hover {
     background-color: #9797ff;
 }
 
+img {
+    max-width: 150px;
+    height: auto;
+    border-radius: 50%;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+ul li {
+    margin: 5px 0;
+}
+
+
+.container {
+    color: #B3AFC0;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 5%;
+    background-color: #1D1B22;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 25px;
+}
+
 .flash-messages {
     list-style: none;
     padding: 0;
@@ -62,18 +89,4 @@ button:hover {
 
 .highlight {
     color: #F4E95A;
-}
-
-img {
-    max-width: 150px;
-    height: auto;
-    border-radius: 50%;
-}
-
-ul {
-    padding-left: 20px;
-}
-
-ul li {
-    margin: 5px 0;
 }

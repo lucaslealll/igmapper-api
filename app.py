@@ -6,7 +6,7 @@ from subprocess import run
 from time import sleep
 
 import requests
-from flask import Flask, flash, redirect, render_template, request, url_for
+from flask import Flask, flash, redirect, render_template, request, send_file, url_for
 from PIL import Image
 
 from igmapper import (
@@ -17,13 +17,14 @@ from igmapper import (
     web_profile_info,
 )
 
-app = Flask(__name__)
-app.secret_key = "your_secret_key"  # Use a strong key in production
 CWD = os.getcwd()
 SRC, LOG = f"{CWD}/src", f"{CWD}/logs"
 PKL = f"{SRC}/cookies.pkl"
 CHROMEDRIVER = f"{CWD}/chromedriver"
 URL = "https://instagram.com/"
+
+app = Flask(__name__)
+app.secret_key = "8Aw0oUR0P8Ue7rBPh9n2ud5wTgvTI6j9RwK4pOnBYPy3itdWd3"  # Use a strong key in production
 
 cookie_valid, retry = False, 1
 while not cookie_valid and retry <= 3:
@@ -49,6 +50,16 @@ while not cookie_valid and retry <= 3:
         extract_cookies(driver, SRC)
 
 
+# Rota para download de arquivo
+@app.route("/profile")
+def download_file():
+    # Caminho do arquivo a ser enviado para o download
+    path = "/home/lucas/Downloads/teste.txt"  # Defina o caminho correto do arquivo
+
+    # Envia o arquivo para o cliente para download
+    return send_file(path, as_attachment=True)
+
+
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
@@ -61,11 +72,13 @@ def index():
             acc = web_profile_info(username, csrftoken)
             user = acc["data"]["user"]
             user_id = user["id"]
-            user_picture = user["profile_pic_url_hd"]
+            user_pic = user["profile_pic_url_hd"]
 
             filename = f"{LOG}/{username}"
             open(f"{filename}.json", "w").write(str(acc))
-            open(f"{CWD}/static/images/profile.png", "wb").write(requests.get(user_picture).content)
+            open(f"{CWD}/static/images/profile.png", "wb").write(
+                requests.get(user_pic).content
+            )
 
             # Verificar se a checkbox foi marcada
             if "calculate_non_followers" in request.form:
@@ -82,13 +95,13 @@ def index():
                     "profile.html",
                     user=user,
                     non_followers=non_followers,
-                    user_picture=user_picture,
+                    user_picture=user_pic,
                 )
 
             return render_template(
                 "profile.html",
                 user=user,
-                user_picture=user_picture,
+                user_picture=user_pic,
             )
 
         except Exception as e:
