@@ -1,6 +1,6 @@
 <div align="center">
-<img src="assets/instagram_logo.png" alt="Logo" height="100px"/>
-<br><br>
+<!-- <img src="assets/instagram_logo.png" alt="Logo" height="100px"/> -->
+<!-- <br><br> -->
 
 ![](https://img.shields.io/badge/Python%20Version-3.10-111?&labelColor=2C6287)
 ![](https://img.shields.io/badge/%20Version%20-1.0.1-111?&labelColor=2C6287)
@@ -44,7 +44,13 @@ python scripts/main.py
 ---
 
 ### Output
-<pre>
+<div align="center">
+  <img src="assets/home.png" alt="Logo" width="500px"/>
+  <img src="assets/profile.png" alt="Logo" width="500px"/>
+</div>
+
+
+<!-- <pre>
 <b>Instagram Followers & Unfollowers</b>
 <b>Enter the Instagram username (without '@'):</b> athena.mentorship
 Cookie file founded...
@@ -78,4 +84,4 @@ Get non followers...
 <b>Do you want to show the followers list? [Y/n]:</b> y
   1) User Name F        username_f      https://instagram.com/username_f
   2) User Name G        username_g      https://instagram.com/username_g
-</pre>
+</pre> -->
