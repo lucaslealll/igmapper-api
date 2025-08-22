@@ -1,56 +1,84 @@
 <div align="center">
-<!-- <img src="assets/instagram_logo.png" alt="Logo" height="100px"/> -->
-<!-- <br><br> -->
+	<picture>
+	<!-- <source media="(prefers-color-scheme: dark)" srcset="assets/quati_white.svg"> -->
+	<source media="(prefers-color-scheme: dark)" srcset="">
+		<img src="" width="100%">
+	</picture>
+	<br><br><br>
+	<hr>
+<h1>igmapper: a <u>quick monitoring tool</u> for Instagram</h1>
+<img src="https://img.shields.io/badge/Author-lucaslealll-blue?logo=github&logoColor=white"> <img src="https://img.shields.io/badge/Status-Beta-DF1F72"> <img src="https://img.shields.io/badge/License-MIT-750014.svg"> <br>
+<img src="https://img.shields.io/badge/Version-1.0.1-white?logo=pypi&logoColor=white"> <img src="https://img.shields.io/badge/Python-3.10-blue?logo=python&logoColor=white"> <img src="https://img.shields.io/badge/Code Style-Black Formatter-111.svg"> <br>
 
-![](https://img.shields.io/badge/Python%20Version-3.10-111?&labelColor=2C6287)
-![](https://img.shields.io/badge/%20Version%20-1.0.1-111?&labelColor=2C6287)
-![](https://img.shields.io/badge/Status-W.I.P-111?&labelColor=2C6287)
-[![](https://img.shields.io/badge/Code%20Style-Black-111?&labelColor=2C6287)](https://github.com/psf/black)
-
-<!-- [![Contributors](https://img.shields.io/github/contributors/lucaslealll/instagram-followers)](https://github.com/lucaslealll/instagram-followers/graphs/contributors/badge/) -->
-<!-- [![Artifact HUB](https://img.shields.io/endpoint?url=_____)](_____) -->
-
-<h1><strong>Instagram Followers & Unfollowers</strong></h1>
 </div>
 
-### This code aims to:
+
+## What is it?
+Maps Non-Followers, Following and Followers...
+
+## Main Features
+Here are just a few of the things that pandas does well:
+
 - list all followers who do not follow the account back;
 - list all followers of an *Instagram* account;
 - list all followers of an *Instagram* account.
 
----
+<h2>Table of Contents</h2><br>
 
-### Install
-> [!IMPORTANT]
-> It's essential to **upgrade pip** to the latest version to ensure compatibility with the library.
-> ```sh
-> pip install --upgrade pip
-> ```
->
-> **Don't forget to install the requirements.**
-> ```sh
-> pip install -r requirements.txt
-> ```
+- [What is it?](#what-is-it)
+- [Main Features](#main-features)
+- [Where to get it / Install](#where-to-get-it--install)
+- [Execute](#execute)
+- [Documentation](#documentation)
+- [License](#license)
+- [Dependencies](#dependencies)
+- [Output](#output)
+  - [Screenshot](#screenshot)
+  - [Terminal](#terminal)
 
----
+## Where to get it / Install
+The source code is currently hosted on GitHub.
 
-### Run
+
+> [!WARNING]
+> It's essential to use [**Python 3.10**](https://www.python.org/downloads/release/python-310/) version
+
+```sh
+# upgrade pip
+pip install --upgrade pip
+```
+```sh
+# install requirements
+pip install -r requirements.txt
+```
+
+## Execute
 To run the application, on the terminal run:
 ```sh
 cd <path_to>/instagram-followers
 python scripts/main.py
 ```
 
----
+## Documentation
+The official documentation is here [Documentation](https://github.com/lucaslealll/igmapper-api/blob/main/doc/DOCUMENTATION.md).
 
-### Output
+## License
+[MIT](https://github.com/lucaslealll/igmapper-api/blob/main/LICENSE)
+
+## Dependencies
+[requests 🡽](https://requests.readthedocs.io/en/latest/) | [selenium 🡽](https://www.selenium.dev/) | [tqdm 🡽](https://tqdm.github.io/)
+
+See the [full installation instructions](https://github.com/lucaslealll/igmapper-api/blob/main/INSTALLATION.md) for minimum supported versions of required, recommended and optional dependencies.
+
+## Output
+### Screenshot
 <div align="center">
-  <img src="assets/home.png" alt="Logo" width="500px"/>
-  <img src="assets/profile.png" alt="Logo" width="500px"/>
+  <img src="assets/home.png" width="500px" style="vertical-align: top;"/> 
+  <img src="assets/profile.png" width="500px" style="vertical-align: top;"/>
 </div>
 
-
-<!-- <pre>
+### Terminal
+<pre>
 <b>Instagram Followers & Unfollowers</b>
 <b>Enter the Instagram username (without '@'):</b> athena.mentorship
 Cookie file founded...
@@ -84,4 +112,8 @@ Get non followers...
 <b>Do you want to show the followers list? [Y/n]:</b> y
   1) User Name F        username_f      https://instagram.com/username_f
   2) User Name G        username_g      https://instagram.com/username_g
-</pre> -->
+</pre>
+
+<hr>
+
+[⇧ Go to Top](#table-of-contents)
