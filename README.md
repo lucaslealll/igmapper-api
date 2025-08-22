@@ -8,21 +8,16 @@
 	<!-- <br><br><br> -->
 	<hr>
 <h1>igmapper: a <u>quick monitoring tool</u> for Instagram</h1>
-<img src="https://img.shields.io/badge/Author-lucaslealll-blue?logo=github&logoColor=white"> <img src="https://img.shields.io/badge/Status-Beta-DF1F72"> <img src="https://img.shields.io/badge/License-MIT-750014.svg"> <br>
-<img src="https://img.shields.io/badge/Version-1.0.1-white?logo=pypi&logoColor=white"> <img src="https://img.shields.io/badge/Python-3.10-blue?logo=python&logoColor=white"> <img src="https://img.shields.io/badge/Code Style-Black Formatter-111.svg"> <br>
+
+<img src="https://img.shields.io/badge/Author-lucaslealll-blue?logo=github&logoColor=white"> <img src="https://img.shields.io/badge/Status-Beta-DF1F72"> <img src="https://img.shields.io/badge/License-MIT-750014.svg">
+<br>
+<img src="https://img.shields.io/badge/Version-1.0.1-white?logo=pypi&logoColor=white"> <img src="https://img.shields.io/badge/Python-3.10-blue?logo=python&logoColor=white"> <img src="https://img.shields.io/badge/Code Style-Black Formatter-111.svg">
+<br>
 
 </div>
 
-
 ## What is it?
 Maps Non-Followers, Following and Followers...
-
-## Main Features
-Here are just a few of the things that pandas does well:
-
-- list all followers who do not follow the account back;
-- list all followers of an *Instagram* account;
-- list all followers of an *Instagram* account.
 
 <h2>Table of Contents</h2><br>
 
@@ -37,6 +32,13 @@ Here are just a few of the things that pandas does well:
   - [Screenshot](#screenshot)
   - [Terminal](#terminal)
 
+## Main Features
+Here are just a few of the things that pandas does well:
+
+- list all followers who do not follow the account back;
+- list all followers of an *Instagram* account;
+- list all followers of an *Instagram* account.
+  
 ## Where to get it / Install
 The source code is currently hosted on GitHub.
 
