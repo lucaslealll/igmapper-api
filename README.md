@@ -1,10 +1,11 @@
 <div align="center">
-	<picture>
-	<!-- <source media="(prefers-color-scheme: dark)" srcset="assets/quati_white.svg"> -->
-	<source media="(prefers-color-scheme: dark)" srcset="">
-		<img src="" width="100%">
+   <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="assets/icon-unofficial.png"> <img src="assets/icon-unofficial.png" height="80px">
 	</picture>
-	<br><br><br>
+      <source media="(prefers-color-scheme: dark)" srcset="assets/logo-instagram.png"> <img src="assets/logo-instagram.png" height="80px">
+   <picture>
+	</picture>
+	<!-- <br><br><br> -->
 	<hr>
 <h1>igmapper: a <u>quick monitoring tool</u> for Instagram</h1>
 <img src="https://img.shields.io/badge/Author-lucaslealll-blue?logo=github&logoColor=white"> <img src="https://img.shields.io/badge/Status-Beta-DF1F72"> <img src="https://img.shields.io/badge/License-MIT-750014.svg"> <br>
@@ -41,7 +42,7 @@ The source code is currently hosted on GitHub.
 
 
 > [!WARNING]
-> It's essential to use [**Python 3.10**](https://www.python.org/downloads/release/python-310/) version
+> It's essential to use [**Python 3.10** 🡽](https://www.python.org/downloads/release/python-310/) version
 
 ```sh
 # upgrade pip
@@ -60,13 +61,13 @@ python scripts/main.py
 ```
 
 ## Documentation
-The official documentation is here [Documentation](https://github.com/lucaslealll/igmapper-api/blob/main/doc/DOCUMENTATION.md).
+- [Documentation 🡽](https://github.com/lucaslealll/igmapper-api/blob/main/doc/DOCUMENTATION.md)
 
 ## License
-[MIT](https://github.com/lucaslealll/igmapper-api/blob/main/LICENSE)
+- [MIT 🡽](https://github.com/lucaslealll/igmapper-api/blob/main/LICENSE)
 
 ## Dependencies
-[requests 🡽](https://requests.readthedocs.io/en/latest/) | [selenium 🡽](https://www.selenium.dev/) | [tqdm 🡽](https://tqdm.github.io/)
+- [requests 🡽](https://requests.readthedocs.io/en/latest/) | [selenium 🡽](https://www.selenium.dev/) | [tqdm 🡽](https://tqdm.github.io/)
 
 See the [full installation instructions](https://github.com/lucaslealll/igmapper-api/blob/main/INSTALLATION.md) for minimum supported versions of required, recommended and optional dependencies.
 
