@@ -32,7 +32,7 @@ Here are just a few of the things that pandas does well:
 - [Documentation](#documentation)
 - [License](#license)
 - [Dependencies](#dependencies)
-- [Output](#output)
+- [Execution Output](#execution-output)
   - [Screenshot](#screenshot)
   - [Terminal](#terminal)
 
@@ -70,11 +70,11 @@ The official documentation is here [Documentation](https://github.com/lucasleall
 
 See the [full installation instructions](https://github.com/lucaslealll/igmapper-api/blob/main/INSTALLATION.md) for minimum supported versions of required, recommended and optional dependencies.
 
-## Output
+## Execution Output
 ### Screenshot
 <div align="center">
-  <img src="assets/home.png" width="500px" style="vertical-align: top;"/> 
-  <img src="assets/profile.png" width="500px" style="vertical-align: top;"/>
+  <img src="assets/home.png" width="49%" style="vertical-align: top;"/> 
+  <img src="assets/profile.png" width="49%" style="vertical-align: top;"/>
 </div>
 
 ### Terminal
